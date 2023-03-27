@@ -5,18 +5,19 @@ from operations import add, sub, mult, div
 app = Flask(__name__)
 
 
+OPERATIONS = {
+    'add': add,
+    'sub': sub,
+    'mult': mult,
+    'div': div
+}
+
+
 def perfom_operation(operation, request):
     a = int(request.args['a'])
     b = int(request.args['b'])
 
-    if operation == 'add':
-        return str(add(a, b))
-    elif operation == 'sub':
-        return str(sub(a, b))
-    elif operation == 'mult':
-        return str(mult(a, b))
-    elif operation == 'div':
-        return str(div(a, b))
+    return str(OPERATIONS[operation](a, b))
 
 
 @app.route('/add')
